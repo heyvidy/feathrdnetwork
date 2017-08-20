@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block body%}
+<div class="container ">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-7 form-box">
+			<h1>Create your Profile</h1>
+			<br>
+			{% if msg %}
+			<div class="alert alert-danger" role="alert">{{msg}}</div>
+			{% endif %}
+
+			<form class="" method="POST" action="/profile/update/" >
+			{% csrf_token %}
+      <p> I know it's a long form, Let's just do it. </p>
+      <div class="form-group">
+				<label>About</label>
+				<input name="about" type="text" class="form-control form-control-sm">
+        <small>A short intro about yourself, What do you do? Or something that adds credibility.</small>
+			</div>
+      <div class="form-group">
+				<label>Skills</label>
+				<input name="skills" type="text" class="form-control form-control-sm" placeholder="Ex: Python, Design, JS etc">
+        <small>What are you good at that others can talk to you about? Separate each skill with a comma</small>
+      </div>
+      <div class="form-group">
+				<label>Are you open for Collaboration?</label><br>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="collab" id="inlineRadio1" value="yes"> Yes
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input class="form-check-input" type="radio" name="collab" id="inlineRadio2" value="no"> No
+            </label>
+          </div>
+      </div>
+			<button type="submit" class="btn btn-primary login-theme-btn">Create</button>
+		</form>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+</div>
+{% endblock %}
