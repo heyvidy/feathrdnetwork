@@ -25,8 +25,10 @@ urlpatterns = [
     url(r'^directory/$', Directory.as_view()),
     url(r'^(?P<username>[a-zA-Z]+)/$', ProfilePage.as_view()),
     url(r'^register/$', Register.as_view()),
-    url(r'^login/$', LoginView.as_view()),
+    url(r'^accounts/login/$', LoginView.as_view()),
     url(r'^logout/$', LogoutView.as_view()),
     url(r'^profile/update/$', CreateProfile.as_view()),
+    url(r'^post/create/$', CreatePost.as_view()),
+    url(r'^project/create/$', CreateProject.as_view()),
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT)

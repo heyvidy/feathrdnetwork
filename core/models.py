@@ -28,8 +28,9 @@ class Project(models.Model):
 
 class Post(models.Model):
     body = models.TextField(blank=True)
-    timestamp = models.DateTimeField(blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project)
+    user = models.ForeignKey(User)
 
     def __str__(self):
         return "On {} on {}".format(self.project, self.timestamp)

@@ -26,8 +26,37 @@
     {% endfor %}
   </div>
   <div class="col-md-5">
-    <a class="btn btn-outline-success btn-sm" href="/post/create/">Update Progress</a>
+    {% if thisuser == request.user %}
     <a class="btn btn-outline-danger btn-sm" href="/project/create/">Add Project</a>
+    <form action="/post/create/" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <br>
+        <label>What's going on?</label>
+        <div class="form-group">
+          <select name="project" class="form-control form-control-sm">
+            {% for project in projects %}
+            <option value="{{project.id}}">{{project.title}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <textarea name="body" class="form-control" rows="3" style="font-size:13px;"></textarea>
+        <br>
+        <div class="set-right">
+          <button class="btn btn-primary btn-sm" type="submit" name="button">Post</button>
+        </div>
+      </div>
+    </form>
+    {% endif %}
+    <hr>
+    {% for post in posts %}
+    <div style="width:100%;">
+        <p style="margin-bottom:5px;"><b>Project: {{post.project.title}}</b></p>
+        <p style="margin-bottom:5px; font-size:12px">{{post.timestamp}}</p>
+        <p style="margin-bottom:5px;">{{post.body}}</p>
+        <hr>
+    </div>
+    {% endfor %}
   </div>
 </div>
 </div>

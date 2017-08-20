@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from braces.views import LoginRequiredMixin
 
 from core.models import *
+import datetime
 
 
 class Home(View):
@@ -29,7 +30,8 @@ class ProfilePage(LoginRequiredMixin, View):
     def get(self, request, username):
         thisuser = User.objects.get(username=username)
         projects = Project.objects.filter(user=thisuser)
-        return render(request, "profile.html", {"thisuser": thisuser, "projects": projects})
+        posts = Post.objects.filter(user=thisuser).order_by('-timestamp')
+        return render(request, "profile.html", {"thisuser": thisuser, "projects": projects, "posts": posts})
 
 
 class Register(View):
@@ -58,6 +60,19 @@ class Register(View):
                     return redirect('/profile/update')
 
 
+class CreatePost(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'create_profile.html')
+
+    def post(self, request):
+        body = request.POST['body']
+        project_id = request.POST['project']
+        project = Project.objects.get(pk=project_id)
+        post = Post(body=body, project=project, user=request.user)
+        post.save()
+        return redirect("/{}/".format(request.user.username))
+
+
 class CreateProfile(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'create_profile.html')
@@ -78,6 +93,22 @@ class CreateProfile(LoginRequiredMixin, View):
                               open_for_collab=collab, user=request.user)
             profile.save()
             return redirect("/directory/")
+
+
+class CreateProject(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'create_project.html')
+
+    def post(self, request):
+        title = request.POST['title']
+        description = request.POST['about']
+        url = request.POST['url']
+        is_active = request.POST['is_active']
+        user = request.user
+        project = Project(title=title, about=description,
+                          user=user, link=url, current=is_active)
+        project.save()
+        return redirect("/{}/".format(user.username))
 
 
 class LogoutView(View):
