@@ -10,11 +10,11 @@
 			{% if msg %}
 			<div class="alert alert-danger" role="alert">{{msg}}</div>
 			{% endif %}
-			<form class="" method="POST" action="/login/" >
+			<form class="" method="POST" action="/accounts/login/" >
 			{% csrf_token %}
       <div class="form-group">
 				<label>Username</label>
-				<input name="username" type="text" class="form-control form-control-sm" placeholder="Last Name">
+				<input name="username" type="text" class="form-control form-control-sm" placeholder="username">
 			</div>
 			<div class="form-group">
 				<label>Password</label>

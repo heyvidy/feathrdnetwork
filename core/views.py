@@ -15,7 +15,7 @@ import datetime
 class Home(View):
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect("/directory/")
+            return redirect("/members/directory/")
         return render(request, 'home.html')
 
 
@@ -133,7 +133,7 @@ class LoginView(View):
             if user is not None:
                 if user.is_authenticated():
                     login(request, user)
-                    return redirect('/dashboard/')
+                    return redirect('/members/directory/')
             else:
                 return render(request, "login.html", {"msg": "Seems like you entered the wrong details."})
         except:
