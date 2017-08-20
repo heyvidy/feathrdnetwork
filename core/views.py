@@ -87,12 +87,12 @@ class CreateProfile(LoginRequiredMixin, View):
             profile.skills = skills
             profile.open_for_collab = collab
             profile.save()
-            return redirect("/directory/")
+            return redirect("/members/directory/")
         except:
             profile = Profile(about=about, skills=skills,
                               open_for_collab=collab, user=request.user)
             profile.save()
-            return redirect("/directory/")
+            return redirect("/members/directory/")
 
 
 class CreateProject(LoginRequiredMixin, View):
