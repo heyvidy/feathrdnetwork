@@ -18,11 +18,18 @@ class Home(View):
         return render(request, 'home.html')
 
 
-class Directory(View):
+class Directory(LoginRequiredMixin, View):
     def get(self, request):
         members = User.objects.all()
         print(members)
         return render(request, "directory.html", {"members": members})
+
+
+class ProfilePage(LoginRequiredMixin, View):
+    def get(self, request, username):
+        thisuser = User.objects.get(username=username)
+        projects = Project.objects.filter(user=thisuser)
+        return render(request, "profile.html", {"thisuser": thisuser, "projects": projects})
 
 
 class Register(View):
