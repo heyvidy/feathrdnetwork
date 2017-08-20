@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^$', Home.as_view()),
     url(r'^members/directory/$', Directory.as_view()),
     url(r'^(?P<username>[a-zA-Z]+)/$', ProfilePage.as_view()),
-    url(r'^register/$', Register.as_view()),
+    url(r'^alohomora/signup/$', Register.as_view()),
     url(r'^accounts/login/$', LoginView.as_view()),
     url(r'^accounts/logout/$', LogoutView.as_view()),
     url(r'^profile/update/$', CreateProfile.as_view()),
