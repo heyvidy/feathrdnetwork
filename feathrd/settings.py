@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", 'feathrd.herokuapp.com']
 
+APPEND_SLASH = True
 
 # Application definition
 

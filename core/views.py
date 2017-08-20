@@ -8,10 +8,21 @@ from django.contrib.auth import authenticate, login, logout
 
 from braces.views import LoginRequiredMixin
 
+from core.models import *
+
 
 class Home(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect("/directory/")
         return render(request, 'home.html')
+
+
+class Directory(View):
+    def get(self, request):
+        members = User.objects.all()
+        print(members)
+        return render(request, "directory.html", {"members": members})
 
 
 class Register(View):
@@ -40,9 +51,26 @@ class Register(View):
                     return redirect('/profile/update')
 
 
-class CreateProfile(View):
+class CreateProfile(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'create_profile.html')
+
+    def post(self, request):
+        about = request.POST['about']
+        skills = request.POST['skills']
+        collab = request.POST['collab']
+        try:
+            profile = Profile.objects.get(user=request.user)
+            profile.about = about
+            profile.skills = skills
+            profile.open_for_collab = collab
+            profile.save()
+            return redirect("/directory/")
+        except:
+            profile = Profile(about=about, skills=skills,
+                              open_for_collab=collab, user=request.user)
+            profile.save()
+            return redirect("/directory/")
 
 
 class LogoutView(View):
@@ -53,13 +81,6 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect("/")
-
-
-class Dashboard(View):
-    def get(self, request):
-        members = User.objects.all()
-        print(members)
-        return render(request, "dashboard.html", {"members": members})
 
 
 class LoginView(View):

@@ -22,10 +22,10 @@ from core.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', Home.as_view()),
-    url(r'^dashboard/$', Dashboard.as_view()),
+    url(r'^directory/$', Directory.as_view()),
     url(r'^register/$', Register.as_view()),
     url(r'^login/$', LoginView.as_view()),
     url(r'^logout/$', LogoutView.as_view()),
-    url(r'^profile/update$', CreateProfile.as_view()),
+    url(r'^profile/update/$', CreateProfile.as_view()),
 ] + static(settings.STATIC_URL,
            document_root=settings.STATIC_ROOT)

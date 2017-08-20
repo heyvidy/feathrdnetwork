@@ -15,7 +15,7 @@
 <body>
       <nav class="navbar navbar-expand-sm navbar-dark   pull-xs-right" style="background-color: #444444; font-size:14px;">
         <div class="container">
-        <a class="navbar-brand" href="/">Feathrd Member Directory</a>
+        <a class="navbar-brand" href="/"><img src="{% static 'waffle.png' %}" style="height:30px" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
           <ul class="navbar-nav ml-auto" style="position:relative; text-align:right;">
             {% if user.is_authenticated %}
             <li class="nav-item ">
-              <a class="nav-link" href="/dashboard/">Dashboard</a>
+              <a class="nav-link" href="/directory/">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/profile/">Profile</a>
