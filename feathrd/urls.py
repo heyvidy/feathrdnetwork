@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 from core.views import *
 
 urlpatterns = [
@@ -25,4 +27,5 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view()),
     url(r'^logout/$', LogoutView.as_view()),
     url(r'^profile/update$', CreateProfile.as_view()),
-]
+] + static(settings.STATIC_URL,
+           document_root=settings.STATIC_ROOT)
