@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block body %}
+<div class="container">
+  <div class="row">
+  <div class="col-md-7">
+    <h3>Progress Feed</h3>
+    <hr>
+    {% for post in posts %}
+    <div style="width:100%; border: 1px solid #DDDDDD; padding:20px; margin-bottom:10px; border-radius:5px">
+        <p style="margin-bottom:5px;"><b><a href="/{{post.user}}/">{{post.user.first_name}}</a></b> posted an update about <b>{{post.project.title}}</b></p>
+        <p style="margin-bottom:5px; font-size:12px">{{post.timestamp | naturaltime}}</p>
+        <p style="margin-bottom:5px;">{{post.body}}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-md-3">
+  </div>
+</div>
+</div>
+{% endblock %}
