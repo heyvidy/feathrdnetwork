@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', Home.as_view()),
     url(r'^members/directory/$', Directory.as_view()),
     url(r'^(?P<username>[a-zA-Z]+)/$', ProfilePage.as_view()),
+    url(r'^feed/progress/$', Feed.as_view()),
     url(r'^accounts/register/$', Register.as_view()),
     url(r'^accounts/login/$', LoginView.as_view()),
     url(r'^accounts/logout/$', LogoutView.as_view()),

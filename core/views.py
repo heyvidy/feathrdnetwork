@@ -19,6 +19,12 @@ class Home(View):
         return render(request, 'home.html')
 
 
+class Feed(LoginRequiredMixin, View):
+    def get(self, request):
+        posts = Post.objects.all().order_by("-timestamp")
+        return render(request, "feed.html", {"posts": posts})
+
+
 class Directory(LoginRequiredMixin, View):
     def get(self, request):
         members = User.objects.all().order_by("id")
@@ -133,7 +139,7 @@ class LoginView(View):
             if user is not None:
                 if user.is_authenticated():
                     login(request, user)
-                    return redirect('/members/directory/')
+                    return redirect('/feed/progress/')
             else:
                 return render(request, "login.html", {"msg": "Seems like you entered the wrong details."})
         except:
