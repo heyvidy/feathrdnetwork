@@ -21,7 +21,7 @@ class Home(View):
 
 class Directory(LoginRequiredMixin, View):
     def get(self, request):
-        members = User.objects.all()
+        members = User.objects.all().order_by("-id")
         print(members)
         return render(request, "directory.html", {"members": members})
 
