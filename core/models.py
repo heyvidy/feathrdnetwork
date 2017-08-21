@@ -16,7 +16,7 @@ class Profile(models.Model):
 
 class Project(models.Model):
     title = models.CharField(blank=False, max_length=100, default="Untitled")
-    about = models.CharField(max_length=140, default="")
+    about = models.CharField(max_length=250, default="")
     link = models.CharField(max_length=250, default="#")
     timestamp = models.DateTimeField(auto_now=True)
     current = models.BooleanField(default=True)
