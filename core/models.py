@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    """
+    Profile models handles all basic info needed from Feathrd members.
+    """
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     about = models.CharField(max_length=200, default="")
     skills = models.CharField(max_length=300, default="")
@@ -15,6 +18,9 @@ class Profile(models.Model):
 
 
 class Project(models.Model):
+    """
+    Project model is used to add Project info.
+    """
     title = models.CharField(blank=False, max_length=100, default="Untitled")
     about = models.CharField(max_length=250, default="")
     link = models.CharField(max_length=250, default="#")
@@ -27,6 +33,10 @@ class Project(models.Model):
 
 
 class Post(models.Model):
+    """
+    Post is an update about a project and each post
+    is linked to project compulsorily. 
+    """
     body = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now=True)
     project = models.ForeignKey(Project)

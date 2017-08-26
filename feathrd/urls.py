@@ -31,5 +31,4 @@ urlpatterns = [
     url(r'^profile/update/$', CreateProfile.as_view()),
     url(r'^post/create/$', CreatePost.as_view()),
     url(r'^project/create/$', CreateProject.as_view()),
-] + static(settings.STATIC_URL,
-           document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
