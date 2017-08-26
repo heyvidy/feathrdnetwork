@@ -23,12 +23,18 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#@80zsoucgypil4j9vj-+9=7pa+69v@ru(-nm7ag%6mo-4yl%o'
+# Should be fetched from env variable if used in production.
+SECRET_KEY = '#@80zssafvsdfl4j9vj-+9=7pa+asdfkj^%$q3q(-nm7ag%6mo-4yl%o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Once DEBUG is set to FALSE, Django does not serve static files and a
+# file storage and serving should be setup with third
+# party service like S3 or CloudFare etc.
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", 'feathrd.herokuapp.com']
+# Should include domains that is used in production.
+# * allows all hosts and must not be used in production.
+ALLOWED_HOSTS = ["*"]
 
 APPEND_SLASH = True
 
@@ -129,7 +135,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
+
 # Update database configuration with $DATABASE_URL.
+# This is necessary for fetching database connection on Heroku.
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
